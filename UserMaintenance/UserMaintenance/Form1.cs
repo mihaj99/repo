@@ -22,6 +22,7 @@ namespace UserMaintenance
             
             button1.Text = Resource1.Add;
             button2.Text = Resource1.SaveToFile;
+            button3.Text = Resource1.Delete;
             
 
             listBox1.DataSource = users;
@@ -57,6 +58,14 @@ namespace UserMaintenance
             }
             sw.Close();
             
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var torlendo = new User();
+            torlendo =(User) listBox1.SelectedItem;
+            users.Remove(torlendo);
+
         }
     }
 }

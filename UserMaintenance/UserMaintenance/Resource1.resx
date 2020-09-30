@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Hozzáadás" xml:space="preserve">
-    <value>Add</value>
+  <data name="Add" xml:space="preserve">
+    <value>Hozzáadás</value>
   </data>
-  <data name="Teljes Név" xml:space="preserve">
-    <value>FullName</value>
+  <data name="FullName" xml:space="preserve">
+    <value>Teljes Név</value>
+  </data>
+  <data name="SaveToFile" xml:space="preserve">
+    <value>Fájlba írás</value>
   </data>
 </root>

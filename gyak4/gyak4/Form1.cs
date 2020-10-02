@@ -17,16 +17,47 @@ namespace gyak4
     {
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
+
         
         public void LoadData()
         {
+            Flats = context.Flats.ToList();
+        }
+        public void CreateExcel()
+        {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet();
+                //CreateTable();
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("Error: {0}\nLine: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg, "Error");
+
+                // Hiba esetén az Excel applikáció bezárása automatikusan
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+
+            }
+            
+
 
         }
         public Form1()
         {
             InitializeComponent();
             LoadData();
-            Flats = context.Flats.ToList();
+            
         }
     }
 }

@@ -53,6 +53,27 @@ namespace gyak4
 
 
         }
+        public void CreateTable()
+        {
+            string[] headers = new string[] 
+            {
+                "Kód",
+                "Eladó",
+                "Oldal",
+                "Kerület",
+                "Lift",
+                "Szobák száma",
+                "Alapterület (m2)",
+                "Ár (mFt)",
+                "Négyzetméter ár (Ft/m2)"
+            };
+            for (int i = 0; i < headers.Length; i++)
+            {
+                xlSheet.Cells[1, i + 1] = headers[i];
+
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();

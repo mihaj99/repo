@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
+
 
 namespace gyak4
 {
@@ -14,6 +17,7 @@ namespace gyak4
     {
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
+        
         public void LoadData()
         {
 

@@ -22,6 +22,7 @@ namespace gyak4
         {
             InitializeComponent();
             LoadData();
+            Flats = context.Flats.ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Gyak6.MnbSeviceReference;
+﻿using Gyak6.Entities;
+using Gyak6.MnbSeviceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace Gyak6
 {
     public partial class Form1 : Form
     {
+        BindingList<RateData> Rates = new BindingList<RateData>();
         private void Fuggveny ()
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
@@ -25,7 +27,7 @@ namespace Gyak6
             };
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
-
+            
             
 
 
@@ -34,6 +36,7 @@ namespace Gyak6
         {
             InitializeComponent();
             Fuggveny();
+            dataGridView1.DataSource = Rates;
         }
     }
 }

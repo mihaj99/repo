@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Gyak6
 {
     public partial class Form1 : Form
     {
+        string XMLeredmeny;
         BindingList<RateData> Rates = new BindingList<RateData>();
         private void Fuggveny ()
         {
@@ -27,10 +29,31 @@ namespace Gyak6
             };
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
+            XMLeredmeny = result;
             
             
 
 
+        }
+        private void XmlProcess()
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(XMLeredmeny);
+            foreach (XmlElement item in xml)
+            {
+                RateData rd = new RateData();
+                rd.Date = DateTime.Parse(item.GetAttribute("Date"));
+                var childElement = (XmlElement)item.ChildNodes[0];
+                rd.Currency = childElement.GetAttribute("curr");
+
+                // Érték
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                    rd.Value = value / unit;
+                Rates.Add(rd);
+
+            }
         }
         public Form1()
         {

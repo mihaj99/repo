@@ -76,6 +76,22 @@ namespace gyak7
             GetPopulation(@"C:\Temp\nép-teszt.csv");
             GetBirthProbabilities(@"C:\Temp\születés.csv");
             GetDeathProbabilities(@"C:\Temp\halál.csv");
+
+            for (int i = 2005; i <= 2024; i++)
+            {
+                foreach (var item in persons)
+                {
+
+                }
+
+                int ferfiakszama = (from x in persons
+                                    where x.Gender == Gender.Male && x.IsAlive == true
+                                    select x).Count();
+                int nokszama = (from x in persons
+                                    where x.Gender == Gender.Female && x.IsAlive == true
+                                    select x).Count();
+                Console.WriteLine(String.Format("Év: {0}, Fiúk:{1}, Lányok:{2}", i.ToString(), ferfiakszama.ToString(), nokszama.ToString()));
+            }
         }
     }
 }

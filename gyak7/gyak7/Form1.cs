@@ -1,5 +1,6 @@
 ﻿using gyak7.Entities;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -70,6 +71,25 @@ namespace gyak7
             sr.Close();
             return DeathProbabilities;
         }
+        public void SimStep(int aktev, Person aktszemely)
+        {
+            if (aktszemely.IsAlive == false) return;
+            int kor = aktev - aktszemely.BirthYear;
+            double szulval = (from x in BirthProbabilities
+                              where x.Age == kor && x.Children == aktszemely.Children
+                              select x.P).FirstOrDefault();
+
+
+            if (rng.NextDouble()<=szulval)
+            {
+                Person newborn = new Person();
+                newborn.Gender = (Gender)rng.Next(1,3);
+                newborn.BirthYear = aktev;
+                newborn.Children = 0;
+                persons.Add(newborn);
+
+            }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -81,7 +101,7 @@ namespace gyak7
             {
                 foreach (var item in persons)
                 {
-
+                    SimStep();
                 }
 
                 int ferfiakszama = (from x in persons

@@ -99,9 +99,9 @@ namespace gyak7
 
             for (int i = 2005; i <= 2024; i++)
             {
-                foreach (var item in persons)
+                foreach (Person item in persons)
                 {
-                    SimStep();
+                    SimStep(i,item);
                 }
 
                 int ferfiakszama = (from x in persons

@@ -8,15 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using gyak8.Abstractions;
 
 namespace gyak8
 {
     public partial class Form1 : Form
     {
-        List<Ball> _balls = new List<Ball>();
-        private BallFactory _factory;
+        List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
 
-        public BallFactory Factory
+        public IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -31,8 +32,8 @@ namespace gyak8
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            Ball ujlabda = Factory.CreateNew();
-            _balls.Add(ujlabda);
+            var ujlabda = Factory.CreateNew();
+            _toys.Add(ujlabda);
             mainPanel.Controls.Add(ujlabda);
             ujlabda.Left = -ujlabda.Width;
 
@@ -42,9 +43,9 @@ namespace gyak8
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
-            foreach (var item in _balls)
+            foreach (var item in _toys)
             {
-                item.MoveBall();
+                item.MoveToy();
                 if (item.Left>maxPosition)
                 {
                     maxPosition = item.Left;
@@ -52,8 +53,8 @@ namespace gyak8
             }
             if (maxPosition==1000)
             {
-                var firstBall = _balls[0];
-                _balls.Remove(firstBall);
+                var firstBall = _toys[0];
+                _toys.Remove(firstBall);
                 mainPanel.Controls.Remove(firstBall);
 
             }

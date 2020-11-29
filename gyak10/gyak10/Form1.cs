@@ -20,6 +20,7 @@ namespace gyak10
         int nbrOfStepsIncrement = 10;
         int generation = 1;
         Brain winnerBrain = null;
+        
 
         public Form1()
         {
@@ -36,6 +37,11 @@ namespace gyak10
                 gc.AddPlayer(nbrOfSteps);
             }
             gc.Start();
+            button1.Enabled = false;
+            if (winnerBrain != null)
+            {
+                button1.Enabled = true;
+            }
 
         }
 

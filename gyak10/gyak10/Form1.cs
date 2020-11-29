@@ -21,6 +21,8 @@ namespace gyak10
             InitializeComponent();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+            gc.AddPlayer();
+            gc.Start(true);
         }
     }
 }
